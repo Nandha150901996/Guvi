@@ -1,0 +1,167 @@
+
+1.) using for loop print 10 to 50 output in negative numbers
+
+
+
+package numberprint;
+
+public class numberprint {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int i;
+		for(i=10; i<=50; i++) {
+			System.out.println(-i);		}
+		
+
+	}
+
+}
+
+using while loop print 10 to 50 output in  negative numbers
+
+package numberprint;
+
+public class numberprint {
+
+	public static void main(String[] args) {
+		
+		int i = 10;
+		
+		while(i<=50) {
+			
+			System.out.println(-i);
+			i++;
+		}
+		
+
+	}
+
+}
+
+3.) rev number input = 876
+
+package Revnumbers;
+
+public class Revnumbers {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		int number = 876;
+				
+		int rev = 0;
+		
+		while (number !=0 ) {
+			
+			int n = number % 10;
+			
+			rev = rev * 10 + n;
+			
+			number = number /10 ;
+		}
+		
+		System.out.println(rev);
+		
+		
+
+	}
+
+
+}
+
+
+2.) given number is positive or negative.
+
+
+package numbercheck;
+
+public class NumberCheck {
+
+    public static void main(String[] args) {
+
+        int number = -100; // Given number
+
+        if (number > 0) {
+            System.out.println(number + " is Positive");
+        } else if (number < 0) {
+            System.out.println(number + " is Negative");
+        } 
+    }
+}
+
+
+4.)smalles number
+
+
+package smallestnumber;
+
+public class SmallestNumber {
+
+    public static void main(String[] args) {
+
+        int num1 = 123;
+        int num2 = 456;
+        int num3 = 789;
+
+        int smallest;
+
+        if (num1 <= num2 && num1 <= num3) {
+            smallest = num1;
+        } else if (num2 <= num1 && num2 <= num3) {
+            smallest = num2;
+        } else {
+            smallest = num3;
+        }
+
+        System.out.println("The smallest number is: " + smallest);
+    }
+}
+
+5.) 
+
+import java.util.Scanner;
+
+public class DiscountCalculator {
+
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the purchase amount: ");
+        double purchaseAmount = scanner.nextDouble();
+        double discount = 0;
+
+        if (purchaseAmount >= 500 && purchaseAmount <= 1000) {
+            discount = 0.10 * purchaseAmount;
+        } else if (purchaseAmount > 1000) {
+            discount = 0.20 * purchaseAmount;
+        }
+
+        double finalAmount = purchaseAmount - discount;
+
+        System.out.println("Discount applied: " + discount);
+        System.out.println("Final payable amount: " + finalAmount);
+
+        scanner.close();
+    }
+}
+
+
+6.)public class PatternPrinter {
+
+    public static void main(String[] args) {
+
+        int n = 5; // Number of rows
+
+        for (int i = 1; i <= n; i++) { // Row control
+            for (int j = 1; j < i; j++) { // Print decreasing numbers from 5 to current row start
+                System.out.print(n - j + 1 + " ");
+            }
+            for (int k = i; k <= n; k++) { // Print same number in the remaining columns
+                System.out.print(n - i + 1 + " ");
+            }
+            System.out.println(); // Move to the next line
+        }
+    }
+}
