@@ -1,0 +1,307 @@
+
+1.1) Answer:
+
+
+
+
+
+public class Person {
+    
+    private String name;
+    private int age;
+
+    public Person(String name) {
+        this.name = name;
+        this.age = 18;
+    }
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public void displayDetails() {
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+    }
+
+    public static void main(String[] args) {
+
+        Person p1 = new Person("Alice");
+        p1.displayDetails();
+
+        System.out.println(); // Just for spacing
+
+
+        Person p2 = new Person("Bob", 25);
+        p2.displayDetails();
+    }
+}
+
+        OUTPUT:
+
+        Name: Alice
+        Age: 18
+
+        Name: Bob
+        Age: 25
+
+
+1.2)  Answer:
+
+
+ public class Product {
+    int pid;
+    double price;
+    int quantity;
+
+    public Product(int pid, double price, int quantity) {
+        this.pid = pid;
+        this.price = price;
+        this.quantity = quantity;
+    }
+}
+        // main method
+
+import java.util.Scanner;
+
+public class ProductMain {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        Product[] products = new Product[5];
+
+        for (int i = 0; i < 5; i++) {
+
+            System.out.println("Enter Product ID, Price and Quantity for product " + (i + 1) + ":");
+
+            int pid = sc.nextInt();
+
+            double price = sc.nextDouble();
+
+            int quantity = sc.nextInt();
+
+            products[i] = new Product(pid, price, quantity);
+
+        }
+
+        double maxPrice = products[0].price;
+
+        int maxPid = products[0].pid;
+
+
+        for (int i = 1; i < products.length; i++) {
+
+            if (products[i].price > maxPrice) {
+
+                maxPrice = products[i].price;
+
+                maxPid = products[i].pid;
+            }
+        }
+
+        System.out.println("Product ID with the highest price: " + maxPid);
+
+        double totalAmount = calculateTotalAmount(products);
+
+        System.out.println("Total amount spent on all products: " + totalAmount);
+    }
+
+
+    public static double calculateTotalAmount(Product[] products) {
+
+        double total = 0;
+
+        for (Product p : products) {
+
+            total += p.price * p.quantity;
+
+        }
+
+        return total;
+
+    }
+}
+
+Output:
+
+Enter Product ID, Price and Quantity for product 1:
+
+101 50 2
+
+Enter Product ID, Price and Quantity for product 2:
+
+102 75 1
+
+Enter Product ID, Price and Quantity for product 3:
+
+103 60 3
+
+Enter Product ID, Price and Quantity for product 4:
+
+104 85 1
+
+Enter Product ID, Price and Quantity for product 5:
+
+105 55 2
+
+Product ID with the highest price: 104
+
+Total amount spent on all products: 505.0
+
+1.3) Answer :
+
+
+public class Account {
+
+    private double balance;
+
+    
+ (default balance 0)
+    public Account() {
+        balance = 0.0;
+    }
+
+
+    public Account(double initialBalance) {
+        balance = initialBalance;
+    }
+
+
+    public void deposit(double amount) {
+
+        if (amount > 0) {
+
+            balance += amount;
+
+            System.out.println("Deposited: " + amount);
+
+        } else {
+
+            System.out.println("Deposit amount must be positive.");
+        }
+    }
+
+
+    public void withdraw(double amount) {
+
+        if (amount > 0 && amount <= balance) {
+
+            balance -= amount;
+
+            System.out.println("Withdrawn: " + amount);
+
+        } else {
+
+            System.out.println("Insufficient balance or invalid amount.");
+        }
+    }
+
+
+    public void displayBalance() {
+
+        System.out.println("Current Balance: " + balance);
+    }
+}
+
+
+public class AccountMain {
+
+    public static void main(String[] args) {
+
+        Account acc1 = new Account();
+
+        acc1.deposit(1000);
+        acc1.withdraw(300);
+        acc1.displayBalance();
+
+        System.out.println();
+
+
+        Account acc2 = new Account(5000);
+
+        acc2.withdraw(1000);
+
+        acc2.deposit(1500);
+
+        acc2.displayBalance();
+    }
+}
+
+Output:
+
+Deposited: 1000.0
+Withdrawn: 300.0
+Current Balance: 700.0
+
+Withdrawn: 1000.0
+Deposited: 1500.0
+Current Balance: 5500.0
+
+
+
+1.4) Answer:
+
+
+// Bass class
+
+public class Person {
+    String name;
+    int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+}
+
+// Subclass:
+
+public class Employee extends Person {
+
+    int employeeID;
+    double salary;
+
+    public Employee(String name, int age, int employeeID, double salary) {
+
+        super(name, age); // Call to parent constructor
+
+        this.employeeID = employeeID;
+
+        this.salary = salary;
+    }
+
+    public void displayDetails() {
+
+        System.out.println("Employee ID: " + employeeID);
+
+        System.out.println("Name       : " + name);
+
+        System.out.println("Age        : " + age);
+
+        System.out.println("Salary     : " + salary);
+
+    }
+}
+
+//Main class:
+
+public class EmployeeMain {
+    public static void main(String[] args) {
+
+        Employee emp = new Employee("John Doe", 30, 1001, 50000.00);
+
+
+        emp.displayDetails();
+    }
+}
+
+output:
+
+
+Employee ID: 1001
+Name       : John Doe
+Age        : 30
+Salary     : 50000.0
