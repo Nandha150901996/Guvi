@@ -1,0 +1,338 @@
+                                                                            JAVA Exception and Collection
+
+1. Q1  Answer:
+
+
+
+class AgeNotWithinRangeException extends Exception {
+    public AgeNotWithinRangeException(String message) {
+        super(message);
+    }
+}
+
+class NameNotValidException extends Exception {
+    public NameNotValidException(String message) {
+        super(message);
+    }
+}
+
+
+class Student {
+    int rollNo;
+    String name;
+    int age;
+    String course;
+
+    public Student(int rollNo, String name, int age, String course) throws AgeNotWithinRangeException, NameNotValidException {
+        if (age < 15 || age > 21) {
+            throw new AgeNotWithinRangeException("Age should be between 15 and 21.");
+        }
+
+        if (!name.matches("[a-zA-Z\\s]+")) {
+            throw new NameNotValidException("Name should only contain alphabets and spaces.");
+        }
+
+        this.rollNo = rollNo;
+        this.name = name;
+        this.age = age;
+        this.course = course;
+    }
+
+    public void displayStudent() {
+        System.out.println("Student Info:");
+        System.out.println("Roll No: " + rollNo);
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+        System.out.println("Course: " + course);
+    }
+}
+
+
+public class Main {
+    public static void main(String[] args) {
+        try {
+            // Try valid inputs
+            Student student1 = new Student(101, "Ramesh Kumar", 20, "Computer Science");
+            student1.displayStudent();
+
+            // Try invalid name
+            Student student2 = new Student(102, "John@123", 18, "Maths");
+
+            // Try invalid age
+            Student student3 = new Student(103, "Priya", 14, "Biology");
+
+        } catch (AgeNotWithinRangeException | NameNotValidException e) {
+            System.out.println("Exception: " + e.getMessage());
+        }
+    }
+}
+
+
+
+Output:
+
+Student Info:
+Roll No: 101
+Name: Ramesh Kumar
+Age: 20
+Course: Computer Science
+Exception: Name should only contain alphabets and spaces.
+
+
+
+Q2.) Answer:
+
+class InvalidVoterAgeException extends Exception {
+    public InvalidVoterAgeException(String message) {
+        super(message);
+    }
+}
+
+
+class Voter {
+    int voterId;
+    String name;
+    int age;
+
+    public Voter(int voterId, String name, int age) throws InvalidVoterAgeException {
+        if (age < 18) {
+            throw new InvalidVoterAgeException("invalid age for voter");
+        }
+        this.voterId = voterId;
+        this.name = name;
+        this.age = age;
+    }
+
+    public void display() {
+        System.out.println("Voter ID: " + voterId);
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+    }
+}
+
+
+public class Main {
+    public static void main(String[] args) {
+        try {
+            Voter v1 = new Voter(101, "Ravi", 17);  // This will throw exception
+            v1.display();
+        } catch (InvalidVoterAgeException e) {
+            System.out.println("Exception: " + e.getMessage());
+        }
+
+        try {
+            Voter v2 = new Voter(102, "Sita", 20);  // Valid age
+            v2.display();
+        } catch (InvalidVoterAgeException e) {
+            System.out.println("Exception: " + e.getMessage());
+        }
+    }
+}
+
+output:
+
+
+Exception: invalid age for voter
+Voter ID: 102
+Name: Sita
+Age: 20
+
+Q3.) Answer:
+
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+
+        String[] weekdays = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter day index (0-6): ");
+        int index = sc.nextInt();
+
+        try {
+            System.out.println("Day: " + weekdays[index]);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Invalid input! Please enter an index between 0 and 6.");
+        }
+    }
+}
+
+
+Output:
+
+Valid input :
+
+Enter day index (0-6): 3
+Day: Wednesday
+
+invalid input :
+
+Enter day index (0-6): 8
+Invalid input! Please enter an index between 0 and 6
+
+Q4.) Answer
+
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class StudentGrades {
+
+    // HashMap to store student name and grade
+    private HashMap<String, Integer> gradesMap = new HashMap<>();
+
+    // Method to add student
+    public void addStudent(String name, int grade) {
+        gradesMap.put(name, grade);
+        System.out.println(name + " added with grade " + grade);
+    }
+
+    // Method to remove student
+    public void removeStudent(String name) {
+        if (gradesMap.containsKey(name)) {
+            gradesMap.remove(name);
+            System.out.println(name + " removed.");
+        } else {
+            System.out.println("Student not found.");
+        }
+    }
+
+    // Method to display grade
+    public void displayGrade(String name) {
+        if (gradesMap.containsKey(name)) {
+            System.out.println(name + "'s grade is: " + gradesMap.get(name));
+        } else {
+            System.out.println("Student not found.");
+        }
+    }
+
+    // Main method for testing
+    public static void main(String[] args) {
+        StudentGrades sg = new StudentGrades();
+        Scanner sc = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("\n1. Add Student\n2. Remove Student\n3. Display Grade\n4. Exit");
+            System.out.print("Choose an option: ");
+            int choice = sc.nextInt();
+            sc.nextLine(); // clear newline
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter student name: ");
+                    String nameAdd = sc.nextLine();
+                    System.out.print("Enter grade: ");
+                    int grade = sc.nextInt();
+                    sg.addStudent(nameAdd, grade);
+                    break;
+
+                case 2:
+                    System.out.print("Enter student name to remove: ");
+                    String nameRemove = sc.nextLine();
+                    sg.removeStudent(nameRemove);
+                    break;
+
+                case 3:
+                    System.out.print("Enter student name to display grade: ");
+                    String nameDisplay = sc.nextLine();
+                    sg.displayGrade(nameDisplay);
+                    break;
+
+                case 4:
+                    System.out.println("Exiting...");
+                    return;
+
+                default:
+                    System.out.println("Invalid option. Try again.");
+            }
+        }
+    }
+}
+
+output:
+
+1. Add Student
+2. Remove Student
+3. Display Grade
+4. Exit
+Choose an option: 1
+Enter student name: Alice
+Enter grade: 90
+Alice added with grade 90
+
+Choose an option: 3
+Enter student name to display grade: Alice
+Alice's grade is: 90
+
+
+
+Q.5) Answer:
+
+import java.util.Scanner;
+import java.util.Stack;
+
+public class StackExample {
+
+    Stack<Integer> stack = new Stack<>();
+
+    // Method to push elements onto the stack
+    public void pushElement(int value) {
+        stack.push(value);
+        System.out.println("Pushed: " + value);
+    }
+
+    // Method to pop elements from the stack
+    public void popElement() {
+        if (!stack.isEmpty()) {
+            int popped = stack.pop();
+            System.out.println("Popped: " + popped);
+        } else {
+            System.out.println("Stack is empty. Nothing to pop.");
+        }
+    }
+
+    public static void main(String[] args) {
+        StackExample se = new StackExample();
+        Scanner sc = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("\n1. Push\n2. Pop\n3. Exit");
+            System.out.print("Enter your choice: ");
+            int choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter an integer to push: ");
+                    int val = sc.nextInt();
+                    se.pushElement(val);
+                    break;
+                case 2:
+                    se.popElement();
+                    break;
+                case 3:
+                    System.out.println("Exiting...");
+                    return;
+                default:
+                    System.out.println("Invalid option. Try again.");
+            }
+        }
+    }
+}
+
+output:
+
+1. Push
+2. Pop
+3. Exit
+Enter your choice: 1
+Enter an integer to push: 100
+Pushed: 100
+
+Enter your choice: 2
+Popped: 100
+
+
+
+
